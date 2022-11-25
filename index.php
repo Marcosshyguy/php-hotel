@@ -39,7 +39,7 @@ $hotels = [
     ],
 
 ];
-
+// var_dump($hotels);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +53,17 @@ $hotels = [
 </head>
 
 <body>
-
+    <ul>
+        <?php for ($i = 0; $i < count($hotels); $i++) {
+            $array = $hotels[$i];
+            echo $array["name"];
+            echo $array["description"];
+            echo $array["parking"];
+            echo $array["vote"];
+            echo $array["distance_to_center"];
+            echo "<br/>";
+        } ?>
+    </ul>
 </body>
 
 </html>
