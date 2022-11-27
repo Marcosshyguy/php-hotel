@@ -39,7 +39,9 @@ $hotels = [
     ],
 
 ];
-// var_dump($hotels);
+$parking = ($_GET["thereIsParking"]) ?? " ";
+var_dump($parking);
+var_dump($hotels);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,17 +55,48 @@ $hotels = [
 </head>
 
 <body>
+    <form action="index.php" method="get">
+        <label for="thereIsParking"></label>
+        <input type="text" id="thereIsParking" name="thereIsParking">
+        <button type="submit">Cerca</button>
+    </form>
+
+    <table class="table table-striped table-dark table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Hotel</th>
+                <th scope="col">Description</th>
+                <th scope="col">Distance to center</th>
+                <th scope="col">Parking</th>
+                <th scope="col">Vote</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php for ($i = 0; $i < count($hotels); $i++) {
+                $array = $hotels[$i]; ?>
+                <tr>
+                    <td><?php echo $array['name'] ?></td>
+                    <td><?php echo $array["description"] ?></td>
+                    <td><?php echo $array["distance_to_center"] ?></td>
+                    <td><?php if ($array["parking"] === true) {
+                            echo "Avaible";
+                        } else {
+                            echo "Not avaible";
+                        } ?>
+                    </td>
+                    <td><?php echo $array["vote"] ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
+
     <ul>
         <?php for ($i = 0; $i < count($hotels); $i++) {
             $array = $hotels[$i];
-            echo "<li>{$array['name']} {$array["description"]} {$array["distance_to_center"]}</li>";
-            // <!-- echo $array["name"];
-            // echo $array["description"];
-            // echo $array["parking"];
-            // // echo $array["vote"];
-            // echo $array["distance_to_center"];
-            // echo "<br />"; -->
-        } ?>
+        ?>
+            <li><?php echo "{$array['name']} {$array["description"]} {$array["distance_to_center"]} "; ?></li>
+        <?php } ?>
     </ul>
 </body>
 
